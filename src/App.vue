@@ -7,15 +7,30 @@
 //   email: String,
 //   telefone: String,
 //   ativo: Boolean,}
-import UserCard from './components/Exercicios/exercicio11.vue';
+// import UserCard from './components/Exercicios/exercicio11.vue';
+import { ref } from 'vue';
+import Exercicio12 from './components/Exercicios/exercicio12.vue';
+
+const produtos = [
+	{ name: 'Vinil Wholla Lotta Red', price: 50 },
+	{ name: 'Vinil utopia', price: 60 },
+	{ name: 'Vinil Die lit', price: 200 }
+];
+const mensagemCompra = ref('');
+function handleBuy(nomeProduto) {
+	const msg = `voce comprou o produto ${nomeProduto}`;
+	mensagemCompra.value = msg;
+	console.log(msg);
+}
 </script>
 
 <template>
-<!-- <UserCard nome="Diego" email="Diegoalvesspfc2@gmail.com" idade="18" telefone="11991496037" ativo="true"></UserCard> -->
-<!-- <UserCard :nome="user.nome" :email="user.email" :idade="user.idade" :telefone="user.telefone" :ativo="user.ativo"></UserCard> -->
-<UserCard titulo="Hardystone Psycho T-shirt" :preco="350" image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSujpKRVC1SFE6oo_-DfIiF9RWXmsX-FD40yRoOV8tbugibd6l92GbdYTiRISNtbB7PPS4&usqp=CAU" :estoque="true"></UserCard>
+	<h2>Produtos</h2>
+	<div v-for="(produto, idx) in produtos" :key="idx">
+		<Exercicio12 :name="produto.name" :price="produto.price" @buy="handleBuy" />
+	</div>
+	<p v-if="mensagemCompra">{{ mensagemCompra }}</p>
 </template>
-
 <style scoped>
 
 
